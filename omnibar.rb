@@ -1,11 +1,18 @@
 #!/usr/bin/env macruby
 # encoding: utf-8
 
-require 'lib/item.rb'
-require 'lib/section.rb'
+libdir = File.dirname(__FILE__)
+$LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
+
+require 'lib/item'
+require 'lib/section'
+
+require 'lib/sections/xiami_cloner_monitor_section'
+require 'lib/sections/time_section'
 
 item = OmniBar::Item.new
 
-item.add_section(OmniBar::Section.new)
+item.add_section(OmniBar::XiamiClonerMonitorSection.new)
+# item.add_section(OmniBar::TimeSection.new)
 
 item.run

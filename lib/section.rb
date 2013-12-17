@@ -6,7 +6,7 @@ module OmniBar
       @first = true
     end
 
-    def menubar_icon
+    def menubar_image
       nil
     end
 
@@ -14,13 +14,7 @@ module OmniBar
       nil
     end
 
-    def changed?
-      if @first
-        @first = false
-        return true
-      else
-        return false
-      end
+    def update
     end
 
     def menu_items

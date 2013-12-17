@@ -8,16 +8,23 @@ module OmniBar
       @status_bar = NSStatusBar.systemStatusBar
       @status_item = @status_bar.statusItemWithLength(NSVariableStatusItemLength)
       @status_item.setTitle 'O'
+      @status_item.highlightMode = true
+
+      @update_mutex = Mutex.new
+      @common_mutex = Mutex.new
 
       @sections = []
 
       @menu = NSMenu.new
-      update_menu
 
       @status_item.setMenu @menu
     end
 
     def run
+      timer = NSTimer.timerWithTimeInterval(1, target: self, selector: 'update_menu', userInfo: nil, repeats: true)
+
+      NSRunLoop.currentRunLoop.addTimer(timer, forMode:NSRunLoopCommonModes)
+
       @app.run
     end
 
@@ -28,6 +35,44 @@ module OmniBar
 
     def quit(sender)
       @app.terminate(self)
+    end
+
+    def update_menu
+      @update_mutex.synchronize do
+
+        @menu.removeAllItems
+        @menu_items_cache = {} unless @menu_items_cache
+
+        # Query each section to add menu items
+        @sections.each do |sec|
+          sec.update
+
+          title = sec.menubar_title
+          image = sec.menubar_image
+
+          @menu_items_cache[sec] = [] unless @menu_items_cache[sec]
+
+          if title
+            @status_item.setTitle(title)
+            @status_item.setImage(nil)
+          end
+
+          if image
+            @status_item.setTitle(nil)
+            @status_item.setImage(image)
+          end
+
+          @menu_items_cache[sec] = sec.menu_items
+          @menu_items_cache[sec].each { |i| @menu.addItem i }
+
+          # [menu insertItem:[NSMenuItem separatorItem] atIndex:index]
+          @menu.addItem NSMenuItem.separatorItem
+        end
+
+        @menu.addItem(quit_menu_item)
+        @menu.update
+
+      end
     end
 
     private
@@ -42,30 +87,6 @@ module OmniBar
         @quit_menu_item.enabled = true
 
         @quit_menu_item
-      end
-
-      def update_menu
-        @menu.removeAllItems
-        @menu_items_cache = {} unless @menu_items_cache
-
-        # Query each section to add menu items
-        @sections.each do |sec|
-          title = sec.menubar_title
-          icon = sec.menubar_icon
-
-          @menu_items_cache[sec] = [] unless @menu_items_cache[sec]
-
-          @status_item.setTitle(title) if title
-          @status_item.setIcon(icon) if icon
-
-          @menu_items_cache[sec] = sec.menu_items
-          @menu_items_cache[sec].each { |i| @menu.addItem i }
-
-          # [menu insertItem:[NSMenuItem separatorItem] atIndex:index]
-          @menu.addItem NSMenuItem.separatorItem
-        end
-
-        @menu.addItem(quit_menu_item)
       end
   end
 

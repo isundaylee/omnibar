@@ -2,3 +2,4 @@
 # Just a funny line.
 source 'https://rubygems.org'
 
+gem 'taglib-ruby'
