@@ -37,8 +37,10 @@ module OmniBar
         @old_lyrics = lyrics
 
         # Trimming blank lines
-        lyrics.shift while (lyrics.first.strip.empty? && lyrics.size > 0)
-        lyrics.pop while (lyrics.last.strip.empty? && lyrics.size > 0)
+        lyrics.shift while (lyrics.size > 0 && lyrics.first.strip.empty?)
+        lyrics.pop while (lyrics.size > 0 && lyrics.last.strip.empty?)
+
+        lyrics.push('没有歌词可以显示... ') if lyrics.empty?
 
         @menu_items = lyrics.map do |line|
           item = NSMenuItem.new
