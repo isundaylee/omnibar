@@ -13,8 +13,8 @@ require 'lib/sections/time_section'
 
 item = OmniBar::Item.new
 
+# item.add_section(OmniBar::TimeSection.new)
 item.add_section(OmniBar::XiamiClonerMonitorSection.new)
 item.add_section(OmniBar::ItunesLyricsSection.new)
-# item.add_section(OmniBar::TimeSection.new)
 
 item.run

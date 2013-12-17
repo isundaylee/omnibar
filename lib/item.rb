@@ -22,7 +22,6 @@ module OmniBar
 
     def run
       timer = NSTimer.timerWithTimeInterval(1, target: self, selector: 'update_menu', userInfo: nil, repeats: true)
-
       NSRunLoop.currentRunLoop.addTimer(timer, forMode:NSRunLoopCommonModes)
 
       @app.run
@@ -50,8 +49,6 @@ module OmniBar
           title = sec.menubar_title
           image = sec.menubar_image
 
-          @menu_items_cache[sec] = [] unless @menu_items_cache[sec]
-
           if title
             @status_item.setTitle(title)
             @status_item.setImage(nil)
@@ -62,8 +59,7 @@ module OmniBar
             @status_item.setImage(image)
           end
 
-          @menu_items_cache[sec] = sec.menu_items
-          @menu_items_cache[sec].each { |i| @menu.addItem i }
+          sec.menu_items.each { |i| @menu.addItem i }
 
           # [menu insertItem:[NSMenuItem separatorItem] atIndex:index]
           @menu.addItem NSMenuItem.separatorItem
@@ -71,7 +67,6 @@ module OmniBar
 
         @menu.addItem(quit_menu_item)
         @menu.update
-
       end
     end
 
