@@ -11,7 +11,6 @@ module OmniBar
       @status_item.highlightMode = true
 
       @update_mutex = Mutex.new
-      @common_mutex = Mutex.new
 
       @sections = []
 
@@ -40,7 +39,6 @@ module OmniBar
       @update_mutex.synchronize do
 
         @menu.removeAllItems
-        @menu_items_cache = {} unless @menu_items_cache
 
         # Query each section to add menu items
         @sections.each do |sec|
