@@ -28,7 +28,7 @@ module OmniBar
       def update_menu_items
         logs_a = `tail -n 5 ~/Library/Logs/xiami_cloner.log`.split("\n").map { |x| x.split("\r").last }
 
-        0.upto(4) { |i| @menu_items[i].title = logs_a[i] }
+        0.upto(4) { |i| @menu_items[i].title = (logs_a[i] || '') }
 
         last = logs_a[4]
 
