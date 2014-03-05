@@ -21,9 +21,9 @@ item.add_section(OmniBar::XiamiClonerMonitorSection.new)
 item.add_section(OmniBar::ItunesLyricsSection.new)
 
 item.add_section(OmniBar::ShortcutSection.new({
-  'Vocabulary List' => '~/Dropbox/Synced/Vocabulary',
-  'Xiami Playlist' => '~/Dropbox/Synced/Playlist',
-  'Xiami Cloned List' => '~/Dropbox/Synced/Cloned'
+  '单词列表' => '~/Dropbox/Synced/Vocabulary',
+  '虾米播放列表' => '~/Dropbox/Synced/Playlist',
+  '虾米已导入列表' => '~/Dropbox/Synced/Cloned'
 }))
 
 item.run
