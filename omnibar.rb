@@ -23,7 +23,8 @@ item.add_section(OmniBar::ItunesLyricsSection.new)
 item.add_section(OmniBar::ShortcutSection.new({
   '单词列表' => '~/Dropbox/Synced/Vocabulary',
   '虾米播放列表' => '~/Dropbox/Synced/Playlist',
-  '虾米已导入列表' => '~/Dropbox/Synced/Cloned'
+  '虾米已导入列表' => '~/Dropbox/Synced/Cloned',
+  'Logic 导出目录' => '~/Music/Logic/Bounces',
 }))
 
 item.run
