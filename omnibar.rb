@@ -12,8 +12,13 @@ require 'lib/sections/itunes_lyrics_section'
 require 'lib/sections/xiami_cloner_trigger_section'
 require 'lib/sections/time_section'
 require 'lib/sections/shortcut_section'
+require 'lib/sections/balance_meter_section'
 
 item = OmniBar::Item.new
+
+item.add_section(OmniBar::BalanceMeterSection.new({
+  'Qujing' => 'qujing'
+}))
 
 # item.add_section(OmniBar::TimeSection.new)
 item.add_section(OmniBar::XiamiClonerTriggerSection.new)
