@@ -6,7 +6,7 @@ module OmniBar
       @app = NSApplication.sharedApplication
 
       @status_bar = NSStatusBar.systemStatusBar
-      @status_item = @status_bar.statusItemWithLength(NSVariableStatusItemLength)
+      @status_item = @status_bar.statusItemWithLength(25)
       @status_item.setTitle 'O'
       @status_item.highlightMode = true
 
