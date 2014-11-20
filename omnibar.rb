@@ -30,6 +30,7 @@ item.add_section(OmniBar::ShortcutSection.new({
   '虾米播放列表' => '~/Dropbox/Synced/Playlist',
   '虾米已导入列表' => '~/Dropbox/Synced/Cloned',
   'Logic 导出目录' => '~/Music/Logic/Bounces',
+  'Sublime User 目录' => '~/Library/Application Support/Sublime Text 3/Packages/User'
 }))
 
 item.run

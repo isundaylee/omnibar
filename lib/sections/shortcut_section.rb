@@ -26,7 +26,7 @@ module OmniBar
     end
 
     def trigger(sender)
-      `open #{@shortcuts[sender.title]}`
+      `open "#{File.expand_path(@shortcuts[sender.title])}"`
     end
 
   end
